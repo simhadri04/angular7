@@ -1,0 +1,81 @@
+routing:app.routing.ts
+
+import { RouterModule, Routes } from '@angular/router';
+import {LoginComponent} from "./login/login.component";
+import {AddUserComponent} from "./add-user/add-user.component";
+import {ListUserComponent} from "./list-user/list-user.component";
+import {EditUserComponent} from "./edit-user/edit-user.component";
+
+const routes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'add-user', component: AddUserComponent },
+  { path: 'list-user', component: ListUserComponent },
+  { path: 'edit-user', component: EditUserComponent },
+  {path : '', component : LoginComponent}
+];
+
+export const routing = RouterModule.forRoot(routes);
+------------------------------------------------------------------------------------------------------------------
+Inside app-routing.module.ts file
+
+import { NgModule } from '@angular/core';
+// Import RouterModule
+import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { AddUserComponent } from './add-user/add-user.component';
+import { ListUserComponent } from './list-user/list-user.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { HomeComponent } from './home/home.component';
+
+// Each route maps a URL path to a component
+const routes: Routes = [
+
+  // This route specifies the route to redirect to if the path
+// is empty. In our case we are redirecting to /home 
+// pathMatch property value can be full or prefix. For now we 
+// will set it to full as we want to do a full match
+
+  { path: '',component: HomeComponent },
+  { path: 'home',component:HomeComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'add-user', component: AddUserComponent },
+  { path: 'list-user', component: ListUserComponent },
+// we can use localStorage
+  // {path:'edit-user', component:EditUserComponent},
+  // we can use routeParams
+  { path: 'edit-user/:id', component: EditUserComponent },
+  //{ path: '',redirectTo:'/home',pathMatch:'full' },
+
+  // {path : '', component : LoginComponent}, // or
+  { path: '**', component: HomeComponent }    
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+-------------------------------------------------------------------------
+Add below code inside db.json file
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Anand",
+      "lastName": "Prabhu",
+      "age": 25,
+      "mobileNumber": "9989568950",
+      "email": "anand-prabhu@gmail.com",
+      "password": "anand@123"
+    },
+    {
+      "firstName": "Suman",
+      "lastName": "Singh",
+      "age": 22,
+      "mobileNumber": "8956895689",
+      "email": "suman@gmail.com",
+      "password": "132456",
+      "id": 3
+    }
+  ]
+}
